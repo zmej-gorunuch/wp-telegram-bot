@@ -128,7 +128,7 @@ class Wp_Telegram_Bot_Admin {
 		/*
 		 * Add a settings page for this plugin to the Settings menu.
 		*/
-		add_options_page( __( 'Bot Telegram settings' ), _( 'WP Telegram Bot' ), 'manage_options', $this->plugin_name, array(
+		add_options_page( __( 'Settings Telegram Bot' ), _( 'WP Telegram Bot' ), 'manage_options', $this->plugin_name, array(
 				$this,
 				'display_plugin_setup_page'
 			)
@@ -197,7 +197,7 @@ class Wp_Telegram_Bot_Admin {
 
 			$message = esc_attr__( 'This is a test message from the site', $this->plugin_name ) . ': ' . home_url();
 
-			$send_message = $this->plugin_public->telegram_send_message( $this->plugin_options['bot_token'], $this->plugin_options['chat_id'], $message );
+			$send_message = $this->plugin_public->send_telegram_message( $this->plugin_options['bot_token'], $this->plugin_options['chat_id'], $message );
 
 			if ( $send_message ) {
 				$data = [ 'message' => __( 'Message sent', $this->plugin_name ) ];

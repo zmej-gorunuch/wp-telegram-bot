@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       WP TelegramBot
  * Plugin URI:        https://weblorem.com
- * Description:       Telegram bot for you WordPress site.
+ * Description:       Integrate Telegram bot with your WordPress site. The plugin sends an email message via the Telegram bot.
  * Version:           1.0.0
  * Author:            Mazuryk Eugene
  * Author URI:        https://weblorem.com

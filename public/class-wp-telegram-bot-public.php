@@ -121,7 +121,7 @@ class Wp_Telegram_Bot_Public {
 	 *
 	 * @return false|int|mixed
 	 */
-	static function telegram_send_message( $token, $chat_id, $message ) {
+	static function send_telegram_message( $token, $chat_id, $message ) {
 
 		if ( $token && $chat_id && $message ) {
 
@@ -155,6 +155,23 @@ class Wp_Telegram_Bot_Public {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Send mail message to Telegram
+	 *
+	 * @param \PHPMailer\PHPMailer\PHPMailer $phpmailer
+	 */
+	function send_mail_to_telegram( PHPMailer\PHPMailer\PHPMailer $phpmailer ) {
+
+		if ( ! empty( $this->plugin_options['bot_token'] ) || ! empty( $this->plugin_options['chat_id'] ) ) {
+			$message = __( 'Message subject:' ) . ' ';
+			$message .= $phpmailer->Subject . PHP_EOL . PHP_EOL;
+			$message .= $phpmailer->Body;
+
+			$this->telegram_send_message( $this->plugin_options['bot_token'], $this->plugin_options['chat_id'], $message );
+		}
+
 	}
 
 }
