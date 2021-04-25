@@ -1,2 +1,2 @@
-# wp-telegram-bot
-Telegram Bot plugin for WordPress site.
+# WordPress Telegram Bot  integrate
+Integrate Telegram bot with your WordPress site. The plugin sends an email message via the Telegram bot.
