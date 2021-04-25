@@ -92,8 +92,16 @@ $chat_id   = $options['chat_id'];
                     <button type="button" class="button wp-hide-pw hide-if-no-js"
                             id="<?php echo $this->plugin_name; ?>-test_message_button">
                         <span class="text spinner-animation"><?php esc_attr_e( 'Send test message', $this->plugin_name ); ?></span>
-                        <span class="spinner is-active spinner-animation" style="display: none"></span>
-                        <span class="text spinner-animation"
+                        <span class="spinner is-active spinner-animation <?php echo $this->plugin_name; ?>-test_message_button" style="display: none"></span>
+                        <span class="text spinner-animation <?php echo $this->plugin_name; ?>-test_message_button"
+                              style="display: none"><?php esc_attr_e( 'Sending...', $this->plugin_name ); ?></span>
+                    </button>
+
+                    <button type="button" class="button wp-hide-pw hide-if-no-js"
+                            id="<?php echo $this->plugin_name; ?>-telegram_chat_id_button">
+                        <span class="text spinner-animation"><?php esc_attr_e( 'Get Telegram chat ID', $this->plugin_name ); ?></span>
+                        <span class="spinner is-active spinner-animation <?php echo $this->plugin_name; ?>-telegram_chat_id_button" style="display: none"></span>
+                        <span class="text spinner-animation <?php echo $this->plugin_name; ?>-telegram_chat_id_button"
                               style="display: none"><?php esc_attr_e( 'Sending...', $this->plugin_name ); ?></span>
                     </button>
 
