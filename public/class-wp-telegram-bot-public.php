@@ -169,7 +169,7 @@ class Wp_Telegram_Bot_Public {
 			$message .= $phpmailer->Subject . PHP_EOL . PHP_EOL;
 			$message .= $phpmailer->Body;
 
-			$this->telegram_send_message( $this->plugin_options['bot_token'], $this->plugin_options['chat_id'], $message );
+			$this->send_telegram_message( $this->plugin_options['bot_token'], $this->plugin_options['chat_id'], $message );
 		}
 
 	}
