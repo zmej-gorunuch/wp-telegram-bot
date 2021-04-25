@@ -170,6 +170,9 @@ class Wp_Telegram_Bot {
 		// Send ajax test messages
 		$this->loader->add_action( 'wp_ajax_send_test_telegram_message', $plugin_admin, 'send_test_telegram_message' );
 
+		// Get ajax telegram chat id
+		$this->loader->add_action( 'wp_ajax_get_telegram_chat_id', $plugin_admin, 'get_telegram_chat_id' );
+
 	}
 
 	/**
