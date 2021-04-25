@@ -186,6 +186,9 @@ class Wp_Telegram_Bot {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
+		// Send mail message to Telegram
+		$this->loader->add_action( 'phpmailer_init', $plugin_public, 'send_mail_to_telegram' );
+
 	}
 
 	/**
