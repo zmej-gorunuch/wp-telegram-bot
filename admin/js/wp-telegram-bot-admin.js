@@ -32,7 +32,7 @@
     // Send test telegram message
     $(function () {
         let send_btn = $('#wp-telegram-bot-test_message_button');
-        let send_btn_spinner = $('.spinner-animation');
+        let send_btn_spinner = $('.spinner-animation.wp-telegram-bot-test_message_button');
         let result_block = $('#wp-telegram-bot-test_message_result');
 
         send_btn.on('click', function (e) {
