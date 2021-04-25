@@ -181,7 +181,6 @@ class Wp_Telegram_Bot_Admin {
 
 	/**
 	 * The function sends ajax test telegram messages
-	 *
 	 */
 	public function send_test_telegram_message() {
 
@@ -189,7 +188,7 @@ class Wp_Telegram_Bot_Admin {
 
 			if ( empty( $this->plugin_options['bot_token'] ) || empty( $this->plugin_options['chat_id'] ) ) {
 				$data = [
-					'message' => __( 'Error! Plugin settings should not be empty', $this->plugin_name ),
+					'message' => __( 'Error! Plugin settings should not be empty.', $this->plugin_name ),
 				];
 				wp_send_json_error( $data );
 			}
@@ -207,6 +206,89 @@ class Wp_Telegram_Bot_Admin {
 					'message' => __( 'Error sending message!', $this->plugin_name ),
 				];
 				wp_send_json_error( $data );
+			}
+
+		}
+
+		$data = [ 'message' => __( 'AJAX query error!', $this->plugin_name ) ];
+		wp_send_json_error( $data );
+
+	}
+
+	/**
+	 * The function get Telegram Chat ID
+	 */
+	function get_telegram_chat_id() {
+		if ( wp_doing_ajax() ) {
+			if ( empty( $this->plugin_options['bot_token'] ) ) {
+				$data = [
+					'message' => __( 'Error! Token should not be empty.', $this->plugin_name ),
+				];
+				wp_send_json_error( $data );
+			}
+
+			$url = 'https://api.telegram.org/bot' . $this->plugin_options['bot_token'] . '/getUpdates';
+
+			$curl = curl_init();
+
+			curl_setopt_array( $curl, array(
+				CURLOPT_POST           => 1,
+				CURLOPT_RETURNTRANSFER => 1,
+				CURLOPT_HEADER         => 0,
+				CURLOPT_URL            => $url,
+			) );
+
+			$server_response = curl_exec( $curl );
+			curl_close( $curl );
+
+			$server_response = json_decode( $server_response, 1 );
+
+			if ( ! $server_response['ok'] ) {
+				$data = [
+					'message' => __( 'Error sending message!', $this->plugin_name ),
+				];
+				wp_send_json_error( $data );
+			} else {
+				$private_chat_array = [];
+				$group_chat_array   = [];
+
+				foreach ( $server_response['result'] as $result ) {
+					if ( $result['message']['chat']['type'] == 'private' ) {
+						$private_chat_array[ $result['message']['date'] ] = [
+							'username' => $result['message']['chat']['username'],
+							'chat_id'  => $result['message']['chat']['id'],
+						];
+					}
+				}
+
+				foreach ( $server_response['result'] as $result ) {
+					if ( $result['message']['chat']['type'] == 'group' ) {
+						$group_chat_array[ $result['message']['date'] ] = [
+							'title'   => $result['message']['chat']['title'],
+							'chat_id' => $result['message']['chat']['id'],
+						];
+					}
+				}
+
+				$private_chat_array = max( $private_chat_array );
+				$group_chat_array   = max( $group_chat_array );
+
+				$private_chat = null;
+				$group_chat   = null;
+
+				if ( ! empty( $private_chat_array['username'] ) && $private_chat_array['chat_id'] ) {
+					$private_chat = '<b>' . __( 'Username:', $this->plugin_name ) . '</b> ' . $private_chat_array['username'] . '<br>';
+					$private_chat .= '<b>' . __( 'Chat ID:', $this->plugin_name ) . '</b> ' . $private_chat_array['chat_id'] . '<br>';
+				}
+
+				if ( ! empty( $group_chat_array['title'] ) && $group_chat_array['chat_id'] ) {
+					$group_chat = '<hr>';
+					$group_chat .= '<b>' . __( 'Group title:', $this->plugin_name ) . '</b> ' . $group_chat_array['title'] . '<br>';
+					$group_chat .= '<b>' . __( 'Group chat ID:', $this->plugin_name ) . '</b> ' . $group_chat_array['chat_id'] . '<br>';
+				}
+
+				$data = [ 'message' => $private_chat . $group_chat ];
+				wp_send_json_success( $data );
 			}
 
 		}

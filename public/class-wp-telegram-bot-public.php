@@ -121,7 +121,7 @@ class Wp_Telegram_Bot_Public {
 	 *
 	 * @return false|int|mixed
 	 */
-	static function send_telegram_message( $token, $chat_id, $message ) {
+	function send_telegram_message( $token, $chat_id, $message ) {
 
 		if ( $token && $chat_id && $message ) {
 
