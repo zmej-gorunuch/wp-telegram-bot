@@ -1,0 +1,219 @@
+<?php
+
+/**
+ * The admin-specific functionality of the plugin.
+ *
+ * @link       https://weblorem.com
+ * @since      1.0.0
+ *
+ * @package    Wp_Telegram_Bot
+ * @subpackage Wp_Telegram_Bot/admin
+ */
+
+/**
+ * The admin-specific functionality of the plugin.
+ *
+ * Defines the plugin name, version, and two examples hooks for how to
+ * enqueue the admin-specific stylesheet and JavaScript.
+ *
+ * @package    Wp_Telegram_Bot
+ * @subpackage Wp_Telegram_Bot/admin
+ * @author     Mazuryk Eugene <mazuryk.e@ukr.net>
+ */
+class Wp_Telegram_Bot_Admin {
+
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string $plugin_name The ID of this plugin.
+	 */
+	private $plugin_name;
+
+	/**
+	 * The version of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string $version The current version of this plugin.
+	 */
+	private $version;
+
+	/**
+	 * All options of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 *
+	 * @var false|mixed|void $plugin_options Options of this plugin.
+	 */
+	private $plugin_options;
+
+	/**
+	 * All options of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 *
+	 * @var object $plugin_public Object class Wp_Telegram_Bot_Public
+	 */
+	private $plugin_public;
+
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @param string $plugin_name The name of this plugin.
+	 * @param string $version The version of this plugin.
+	 *
+	 * @since    1.0.0
+	 */
+	public function __construct( $plugin_name, $version ) {
+
+		$this->plugin_name    = $plugin_name;
+		$this->version        = $version;
+		$this->plugin_options = get_option( $this->plugin_name );
+		$this->plugin_public  = new Wp_Telegram_Bot_Public( $this->plugin_name, $this->version );
+
+	}
+
+	/**
+	 * Register the stylesheets for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_styles() {
+		/**
+		 * This function is provided for demonstration purposes only.
+		 *
+		 * An instance of this class should be passed to the run() function
+		 * defined in Wp_Telegram_Bot_Loader as all of the hooks are defined
+		 * in that particular class.
+		 *
+		 * The Wp_Telegram_Bot_Loader will then create the relationship
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 */
+
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-telegram-bot-admin.css', array(), $this->version, 'all' );
+
+	}
+
+	/**
+	 * Register the JavaScript for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_scripts() {
+		/**
+		 * This function is provided for demonstration purposes only.
+		 *
+		 * An instance of this class should be passed to the run() function
+		 * defined in Wp_Telegram_Bot_Loader as all of the hooks are defined
+		 * in that particular class.
+		 *
+		 * The Wp_Telegram_Bot_Loader will then create the relationship
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 */
+
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-telegram-bot-admin.js', array( 'jquery' ), $this->version, false );
+
+	}
+
+	/**
+	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
+	 */
+	public function add_plugin_admin_menu() {
+		/*
+		 * Add a settings page for this plugin to the Settings menu.
+		*/
+		add_options_page( __( 'Bot Telegram settings' ), _( 'WP Telegram Bot' ), 'manage_options', $this->plugin_name, array(
+				$this,
+				'display_plugin_setup_page'
+			)
+		);
+	}
+
+	/**
+	 * Add settings action link to the plugins page.
+	 */
+	public function add_action_links( $links ) {
+
+		$settings_link = array(
+			'<a href="' . admin_url( 'options-general.php?page=' . $this->plugin_name ) . '">' . __( 'Settings', $this->plugin_name ) . '</a>',
+		);
+
+		return array_merge( $settings_link, $links );
+
+	}
+
+	/**
+	 * Render the settings page for this plugin.
+	 */
+	public function display_plugin_setup_page() {
+
+		include_once( 'partials/wp-telegram-bot-admin-display.php' );
+
+	}
+
+	/**
+	 * Validate options
+	 *
+	 * @param $input
+	 *
+	 * @return array
+	 */
+	public function validate( $input ) {
+		$valid              = array();
+		$valid['bot_token'] = ( isset( $input['bot_token'] ) && ! empty( $input['bot_token'] ) ) ? $input['bot_token'] : '';
+		$valid['chat_id']   = ( isset( $input['chat_id'] ) && ! empty( $input['chat_id'] ) ) ? $input['chat_id'] : '';
+
+		return $valid;
+	}
+
+	/**
+	 * Update all options
+	 */
+	public function options_update() {
+		register_setting( $this->plugin_name, $this->plugin_name, array( $this, 'validate' ) );
+	}
+
+	/**
+	 * The function sends ajax test telegram messages
+	 *
+	 */
+	public function send_test_telegram_message() {
+
+		if ( wp_doing_ajax() ) {
+
+			if ( empty( $this->plugin_options['bot_token'] ) || empty( $this->plugin_options['chat_id'] ) ) {
+				$data = [
+					'message' => __( 'Error! Plugin settings should not be empty', $this->plugin_name ),
+				];
+				wp_send_json_error( $data );
+			}
+
+
+			$message = esc_attr__( 'This is a test message from the site', $this->plugin_name ) . ': ' . home_url();
+
+			$send_message = $this->plugin_public->telegram_send_message( $this->plugin_options['bot_token'], $this->plugin_options['chat_id'], $message );
+
+			if ( $send_message ) {
+				$data = [ 'message' => __( 'Message sent', $this->plugin_name ) ];
+				wp_send_json_success( $data );
+			} else {
+				$data = [
+					'message' => __( 'Error sending message!', $this->plugin_name ),
+				];
+				wp_send_json_error( $data );
+			}
+
+		}
+
+		$data = [ 'message' => __( 'AJAX query error!', $this->plugin_name ) ];
+		wp_send_json_error( $data );
+
+	}
+
+}
