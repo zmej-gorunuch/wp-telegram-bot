@@ -189,6 +189,9 @@ class Wp_Telegram_Bot {
 		// Send mail message to Telegram
 		$this->loader->add_action( 'phpmailer_init', $plugin_public, 'send_mail_to_telegram' );
 
+		// Get ajax telegram chat id
+		$this->loader->add_action( 'wp_ajax_get_telegram_chat_id', $plugin_admin, 'get_telegram_chat_id' );
+
 	}
 
 	/**
