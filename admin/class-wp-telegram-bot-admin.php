@@ -245,7 +245,7 @@ class Wp_Telegram_Bot_Admin {
 
 			if ( ! $server_response['ok'] ) {
 				$data = [
-					'message' => __( 'Error sending message!', $this->plugin_name ),
+					'message' => __( 'Error Telegram API!', $this->plugin_name ),
 				];
 				wp_send_json_error( $data );
 			} else {
@@ -270,8 +270,13 @@ class Wp_Telegram_Bot_Admin {
 					}
 				}
 
-				$private_chat_array = max( $private_chat_array );
-				$group_chat_array   = max( $group_chat_array );
+				if ( empty( $private_chat_array ) && empty( $group_chat_array ) ) {
+					$data = [ 'message' => __( 'Write a private message to your Telegram bot, or add it to a group.', $this->plugin_name ) ];
+					wp_send_json_error( $data );
+				}
+
+				$private_chat_array = array_pop( $private_chat_array );
+				$group_chat_array   = array_pop( $group_chat_array );
 
 				$private_chat = null;
 				$group_chat   = null;
