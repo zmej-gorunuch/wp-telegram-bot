@@ -37,6 +37,8 @@
 
         send_btn.on('click', function (e) {
             e.preventDefault();
+            result_block.hide().empty().removeClass('notice-error notice-success');
+
             $.ajax({
                 url: ajaxurl,
                 type: 'POST',
@@ -78,6 +80,8 @@
 
         send_btn.on('click', function (e) {
             e.preventDefault();
+            result_block.hide().empty().removeClass('notice-error notice-success');
+
             $.ajax({
                 url: ajaxurl,
                 type: 'POST',
