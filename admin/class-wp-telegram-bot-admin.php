@@ -128,7 +128,7 @@ class Wp_Telegram_Bot_Admin {
 		/*
 		 * Add a settings page for this plugin to the Settings menu.
 		*/
-		add_options_page( __( 'Settings Telegram Bot' ), _( 'WP Telegram Bot' ), 'manage_options', $this->plugin_name, array(
+		add_options_page( __( 'Settings Telegram Bot', $this->plugin_name ), __( 'WP Telegram Bot', $this->plugin_name ), 'manage_options', $this->plugin_name, array(
 				$this,
 				'display_plugin_setup_page'
 			)
@@ -199,7 +199,7 @@ class Wp_Telegram_Bot_Admin {
 			$send_message = $this->plugin_public->send_telegram_message( $this->plugin_options['bot_token'], $this->plugin_options['chat_id'], $message );
 
 			if ( $send_message ) {
-				$data = [ 'message' => __( 'Message sent', $this->plugin_name ) ];
+				$data = [ 'message' => __( 'Message sent!', $this->plugin_name ) ];
 				wp_send_json_success( $data );
 			} else {
 				$data = [
@@ -287,7 +287,7 @@ class Wp_Telegram_Bot_Admin {
 				}
 
 				if ( ! empty( $group_chat_array['title'] ) && $group_chat_array['chat_id'] ) {
-					$group_chat = '<hr>';
+					$group_chat = ! empty( $private_chat ) ? '<hr>' : null;
 					$group_chat .= '<b>' . __( 'Group title:', $this->plugin_name ) . '</b> ' . $group_chat_array['title'] . '<br>';
 					$group_chat .= '<b>' . __( 'Group chat ID:', $this->plugin_name ) . '</b> ' . $group_chat_array['chat_id'] . '<br>';
 				}

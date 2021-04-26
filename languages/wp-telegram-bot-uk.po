@@ -2,7 +2,6 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Telegram Bot\n"
@@ -11,7 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2021-04-26 19:36+0200\n"
 "Last-Translator: Mazuryk Eugene <mazuryk.e@ukr.net>\n"
 "Language-Team: WebLorem <info@weblorem.com>\n"
-"Language: en_US\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,102 +19,102 @@ msgstr ""
 
 #: admin/class-wp-telegram-bot-admin.php:131
 msgid "Settings Telegram Bot"
-msgstr ""
+msgstr "Налаштування Telegram Bot"
 
 #: admin/class-wp-telegram-bot-admin.php:131
 msgid "WP Telegram Bot"
-msgstr ""
+msgstr "WP Telegram Bot"
 
 #: admin/class-wp-telegram-bot-admin.php:144
 msgid "Settings"
-msgstr ""
+msgstr "Налаштування"
 
 #: admin/class-wp-telegram-bot-admin.php:191
 msgid "Error! Plugin settings should not be empty."
-msgstr ""
+msgstr "Помилка! Налаштування плагіна не можуть бути порожніми."
 
 #: admin/class-wp-telegram-bot-admin.php:197
 msgid "This is a test message from the site"
-msgstr ""
+msgstr "Це тестове повідомлення з сайту"
 
 #: admin/class-wp-telegram-bot-admin.php:202
 msgid "Message sent!"
-msgstr ""
+msgstr "Повідомлення відправлено!"
 
 #: admin/class-wp-telegram-bot-admin.php:206
 msgid "Error sending message!"
-msgstr ""
+msgstr "Помилка відправки повідомлення!"
 
 #: admin/class-wp-telegram-bot-admin.php:213
 #: admin/class-wp-telegram-bot-admin.php:301
 msgid "AJAX query error!"
-msgstr ""
+msgstr "Помилка AJAX запиту!"
 
 #: admin/class-wp-telegram-bot-admin.php:225
 msgid "Error! Token should not be empty."
-msgstr ""
+msgstr "Помилка! Токен не може бути порожнім."
 
 #: admin/class-wp-telegram-bot-admin.php:248
 msgid "Error Telegram API!"
-msgstr ""
+msgstr "Помилка Telegram API!"
 
 #: admin/class-wp-telegram-bot-admin.php:274
 msgid "Write a private message to your Telegram bot, or add it to a group."
-msgstr ""
+msgstr "Напишіть приватне повідомлення своєму Telegram боту, або додайте його до групи."
 
 #: admin/class-wp-telegram-bot-admin.php:285
 msgid "Username:"
-msgstr ""
+msgstr "Ім'я користувача:"
 
 #: admin/class-wp-telegram-bot-admin.php:286
 msgid "Chat ID:"
-msgstr ""
+msgstr "Ідентифікатор чату:"
 
 #: admin/class-wp-telegram-bot-admin.php:291
 msgid "Group title:"
-msgstr ""
+msgstr "Назва групи:"
 
 #: admin/class-wp-telegram-bot-admin.php:292
 msgid "Group chat ID:"
-msgstr ""
+msgstr "Ідентифікатор групи:"
 
 #: admin/partials/wp-telegram-bot-admin-display.php:44
 msgid "Token"
-msgstr ""
+msgstr "Токен"
 
 #: admin/partials/wp-telegram-bot-admin-display.php:54
 msgid "Enter bot token"
-msgstr ""
+msgstr "Введіть токен"
 
 #: admin/partials/wp-telegram-bot-admin-display.php:57
 msgid "Token received from BotFather."
-msgstr ""
+msgstr "Токен бота, отриманий від BotFather."
 
 #: admin/partials/wp-telegram-bot-admin-display.php:65
 msgid "Chat ID"
-msgstr ""
+msgstr "Ідентифікатор чату"
 
 #: admin/partials/wp-telegram-bot-admin-display.php:75
 msgid "Enter chat id"
-msgstr ""
+msgstr "Введіть ідентифікатор чату"
 
 #: admin/partials/wp-telegram-bot-admin-display.php:78
 msgid "Telegram chat id or group id."
-msgstr ""
+msgstr "Унікальний ідентифікатор Telegram чату або групи."
 
 #: admin/partials/wp-telegram-bot-admin-display.php:94
 msgid "Send test message"
-msgstr ""
+msgstr "Відправити тестове повідомлення"
 
 #: admin/partials/wp-telegram-bot-admin-display.php:97
 #: admin/partials/wp-telegram-bot-admin-display.php:105
 msgid "Sending..."
-msgstr ""
+msgstr "Надсилання..."
 
 #: admin/partials/wp-telegram-bot-admin-display.php:102
 msgid "Get Telegram chat ID"
-msgstr ""
+msgstr "Отримати ідентифікатор Telegram чату"
 
 #: public/class-wp-telegram-bot-public.php:168
 msgid "Message subject:"
-msgstr ""
+msgstr "Тема повідомлення:"
