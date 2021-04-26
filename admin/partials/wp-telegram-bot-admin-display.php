@@ -45,8 +45,8 @@ $chat_id   = $options['chat_id'];
                     </label>
                 </th>
                 <td>
-                    <input type="text"
-                           class="regular-text code" id="<?php echo $this->plugin_name; ?>-bot_token"
+                    <input type="password"
+                           class="regular-text" id="<?php echo $this->plugin_name; ?>-bot_token"
                            name="<?php echo $this->plugin_name; ?>[bot_token]"
                            value="<?php if ( ! empty( $bot_token ) ) {
 						       esc_attr_e( $bot_token, $this->plugin_name );
@@ -67,7 +67,7 @@ $chat_id   = $options['chat_id'];
                 </th>
                 <td>
                     <input type="text"
-                           class="all-options code" id="<?php echo $this->plugin_name; ?>-chat_id"
+                           class="all-options" id="<?php echo $this->plugin_name; ?>-chat_id"
                            name="<?php echo $this->plugin_name; ?>[chat_id]"
                            value="<?php if ( ! empty( $chat_id ) ) {
 						       esc_attr_e( $chat_id, $this->plugin_name );
@@ -75,7 +75,7 @@ $chat_id   = $options['chat_id'];
                            placeholder="<?php esc_attr_e( 'Enter chat id', $this->plugin_name ); ?>"
                     />
                     <span class="description">
-                    <?php esc_attr_e( 'Telegram chat id.', $this->plugin_name ); ?>
+                    <?php esc_attr_e( 'Telegram chat id or group id.', $this->plugin_name ); ?>
                 </span>
                 </td>
             </tr>
