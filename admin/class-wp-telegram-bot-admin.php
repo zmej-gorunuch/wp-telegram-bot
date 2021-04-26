@@ -262,7 +262,9 @@ class Wp_Telegram_Bot_Admin {
 				}
 
 				foreach ( $server_response['result'] as $result ) {
-					if ( $result['message']['chat']['type'] == 'group' ) {
+					if ( $result['message']['chat']['type'] == 'group'
+					     || $result['message']['chat']['type'] == 'supergroup'
+					     || $result['message']['chat']['type'] == 'channel' ) {
 						$group_chat_array[ $result['message']['date'] ] = [
 							'title'   => $result['message']['chat']['title'],
 							'chat_id' => $result['message']['chat']['id'],
